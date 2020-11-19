@@ -26,6 +26,12 @@ import FavoritesScreen, {
 import FiltersScreen, {
   screenOptions as FiltersScreenOptions,
 } from "../screens/FiltersScreen";
+import UserProductScreen, {
+  screenOptions as UserProductScreenOptions,
+} from "../screens/UserProductScreen";
+import EditProductScreen, {
+  screenOptions as EditProductScreenOptions,
+} from "../screens/EditProduct";
 
 import Colors from "../constants/Colors";
 
@@ -59,6 +65,17 @@ export const MealsNavigator = () => {
         component={CategoriesScreen}
         options={CategoriesScreenOptions}
       />
+      <MealsStackNavigator.Screen
+        name="Product"
+        component={UserProductScreen}
+        options={UserProductScreenOptions}
+      />
+      <MealsStackNavigator.Screen
+        name="EditProduct"
+        component={EditProductScreen}
+        options={EditProductScreenOptions}
+      />
+
       <MealsStackNavigator.Screen
         name="CategoryMeals"
         component={CategoryMealsScreen}

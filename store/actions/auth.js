@@ -37,7 +37,7 @@ export const signup = (
   abort
 ) => {
   return async (dispatch) => {
-    const response = await fetch(`${path}/api/auth/user-new`, {
+    const response = await fetch(`${path}/api/seller/auth/new`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +74,7 @@ export const signup = (
 
 export const login = (email, password) => {
   return async (dispatch) => {
-    const response = await fetch(`${path}/api/auth/user-login`, {
+    const response = await fetch(`${path}/api/seller/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

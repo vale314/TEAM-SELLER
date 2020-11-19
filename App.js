@@ -12,12 +12,14 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import AppNavigator from "./navigation/AppNavigator";
 import mealsReducer from "./store/reducers/meals";
 import authReducer from "./store/reducers/auth";
+import productsReducer from "./store/reducers/products";
 
 enableScreens();
 
 const rootReducer = combineReducers({
   meals: mealsReducer,
   auth: authReducer,
+  products: productsReducer,
 });
 
 const store = createStore(

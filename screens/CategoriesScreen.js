@@ -45,6 +45,18 @@ export const screenOptions = (navData) => {
         />
       </HeaderButtons>
     ),
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        {" "}
+        <Item
+          title="Menu"
+          iconName="ios-add"
+          onPress={() => {
+            navData.navigation.navigate("Product");
+          }}
+        />
+      </HeaderButtons>
+    ),
   };
 };
 
