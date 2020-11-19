@@ -19,7 +19,7 @@ export const setDidTryAL = () => {
   return { type: SET_DID_TRY_AL };
 };
 
-export const authenticate = (userId = "", token, expiryTime) => {
+export const authenticate = (userId, token, expiryTime) => {
   return (dispatch) => {
     dispatch(setLogoutTimer(expiryTime));
     dispatch({ type: AUTHENTICATE, userId: userId, token: token });
@@ -37,7 +37,7 @@ export const signup = (
   abort
 ) => {
   return async (dispatch) => {
-    const response = await fetch(`${path}/api/seller/auth/new`, {
+    const response = await fetch(`${path}/api/seller/new`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +74,7 @@ export const signup = (
 
 export const login = (email, password) => {
   return async (dispatch) => {
-    const response = await fetch(`${path}/api/seller/auth/login`, {
+    const response = await fetch(`${path}/api/seller/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

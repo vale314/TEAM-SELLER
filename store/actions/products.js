@@ -116,7 +116,7 @@ export const createProduct = (title, description, imageUrl, price) => {
         title: ProductTitle,
         description: ProductDescription,
 
-        imageUrl: ProductImageUrl,
+        imageurl: ProductImageUrl,
         price: ProductPrice,
         ownerId: ProductOwnerId,
       },
@@ -132,7 +132,7 @@ export const updateProduct = (
   productId
 ) => {
   return async (dispatch, getState) => {
-    dispatch(deleteProduct(productId));
+    await dispatch(deleteProduct(productId));
 
     dispatch(createProduct(title, description, imageUrl, price));
   };

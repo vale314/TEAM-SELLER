@@ -14,7 +14,7 @@ const MealList = (props) => {
     return (
       <MealItem
         title={itemData.item.title}
-        image={itemData.item.imageUrl}
+        image={itemData.item.imageurl}
         precio={itemData.item.precio}
         estandar={itemData.item.estandar}
         onSelectMeal={() => {

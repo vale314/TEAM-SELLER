@@ -61,13 +61,13 @@ const EditProductScreen = (props) => {
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {
       title: editedProduct ? editedProduct.title : "",
-      imageUrl: editedProduct ? editedProduct.imageurl : "",
+      imageurl: editedProduct ? editedProduct.imageurl : "",
       description: editedProduct ? editedProduct.description_product : "",
       price: editedProduct ? editedProduct.price : "",
     },
     inputValidities: {
       title: editedProduct ? true : false,
-      imageUrl: editedProduct ? true : false,
+      imageurl: editedProduct ? true : false,
       description: editedProduct ? true : false,
       price: editedProduct ? true : false,
     },
@@ -91,11 +91,16 @@ const EditProductScreen = (props) => {
     setIsLoading(true);
     try {
       if (editedProduct) {
+        // console.log(
+        //   formState.inputValues.title,
+        //   formState.inputValues.description,
+        //   formState.inputValues.price
+        // );
         await dispatch(
           productsActions.updateProduct(
             formState.inputValues.title,
             formState.inputValues.description,
-            formState.inputValues.imageUrl,
+            formState.inputValues.imageurl,
             +formState.inputValues.price,
             editedProduct.id
           )
@@ -105,7 +110,7 @@ const EditProductScreen = (props) => {
           productsActions.createProduct(
             formState.inputValues.title,
             formState.inputValues.description,
-            formState.inputValues.imageUrl,
+            formState.inputValues.imageurl,
             +formState.inputValues.price
           )
         );
@@ -164,12 +169,12 @@ const EditProductScreen = (props) => {
           />
 
           <ImagePicker
-            id="imageUrl"
+            id="imageurl"
             label="Image Url"
             errorText="Please enter a valid image url!"
             onInputChange={inputChangeHandler}
             initialValue={editedProduct ? editedProduct.imageurl : ""}
-            value={formState.inputValues.imageUrl}
+            value={formState.inputValues.imageurl}
             initiallyValid={!!editedProduct}
             required
           />
