@@ -81,7 +81,15 @@ export const createProduct = (
   isVegetarian,
   isGlutenFree,
   isLactoseFree,
-  isVegan
+  isVegan,
+  isDesayuno,
+  isComida,
+  isSnack,
+  isLonche,
+  isSandiwch,
+  isTaco,
+  isPan,
+  isDulce
 ) => {
   return async (dispatch, getState) => {
     // any async code you want!
@@ -106,6 +114,14 @@ export const createProduct = (
         glutenFree: isGlutenFree,
         lactoseFree: isLactoseFree,
         vegan: isVegan,
+        desayuno: isDesayuno,
+        comida: isComida,
+        snack: isSnack,
+        lonche: isLonche,
+        sandiwch: isSandiwch,
+        taco: isTaco,
+        pan: isPan,
+        dulce: isDulce,
       }),
     });
     const resData = await response.json();
@@ -129,6 +145,14 @@ export const createProduct = (
       ProductGlutenFree,
       ProductLactosaFree,
       ProductVegan,
+      ProductDesayuno,
+      ProductComida,
+      ProductSnack,
+      ProductLoche,
+      ProductSandiwch,
+      ProductTaco,
+      ProductPan,
+      ProductDulce,
     } = resData.product;
 
     dispatch({
@@ -146,6 +170,14 @@ export const createProduct = (
         glutenFree: ProductGlutenFree,
         lactosaFree: ProductLactosaFree,
         vegan: ProductVegan,
+        desayuno: ProductDesayuno,
+        comida: ProductComida,
+        snack: ProductSnack,
+        lonche: ProductLoche,
+        sandiwch: ProductSandiwch,
+        taco: ProductTaco,
+        pan: ProductPan,
+        dulce: ProductDulce,
       },
     });
   };
@@ -162,7 +194,15 @@ export const updateProduct = (
   isVegetarian,
   isGlutenFree,
   isLactoseFree,
-  isVegan
+  isVegan,
+  isDesayuno,
+  isComida,
+  isSnack,
+  isLonche,
+  isSandiwch,
+  isTaco,
+  isPan,
+  isDulce
 ) => {
   return async (dispatch, getState) => {
     await dispatch(deleteProduct(productId));
@@ -178,7 +218,15 @@ export const updateProduct = (
         isVegetarian,
         isGlutenFree,
         isLactoseFree,
-        isVegan
+        isVegan,
+        isDesayuno,
+        isComida,
+        isSnack,
+        isLonche,
+        isSandiwch,
+        isTaco,
+        isPan,
+        isDulce
       )
     );
   };

@@ -69,6 +69,15 @@ const EditProductScreen = (props) => {
   const [isVegan, setIsVegan] = useState(false);
   const [isVegetarian, setIsVegetarian] = useState(false);
 
+  const [isDesayuno, setIsDesayuno] = useState(false);
+  const [isComida, setIsComida] = useState(false);
+  const [isSnack, setIsSnack] = useState(false);
+  const [isLonche, setIsLonche] = useState(false);
+  const [isSandiwch, setIsSandiwch] = useState(false);
+  const [isTaco, setIsTaco] = useState(false);
+  const [isPan, setIsPan] = useState(false);
+  const [isDulce, setIsDulce] = useState(false);
+
   const [error, setError] = useState();
   var prodId = null;
   if (props.route.params !== undefined) {
@@ -88,6 +97,15 @@ const EditProductScreen = (props) => {
       setIsLactoseFree(editedProduct.lactoseFree == 1 ? true : false);
       setIsVegan(editedProduct.vegan == 1 ? true : false);
       setIsVegetarian(editedProduct.vegetarian == 1 ? true : false);
+
+      setIsDesayuno(editedProduct.desayuno == 1 ? true : false);
+      setIsComida(editedProduct.comida == 1 ? true : false);
+      setIsSnack(editedProduct.snack == 1 ? true : false);
+      setIsLonche(editedProduct.lonche == 1 ? true : false);
+      setIsTaco(editedProduct.taco == 1 ? true : false);
+      setIsPan(editedProduct.pan == 1 ? true : false);
+      setIsDulce(editedProduct.dulce == 1 ? true : false);
+      setIsSandiwch(editedProduct.sandiwch == 1 ? true : false);
     }
   }, [editedProduct]);
 
@@ -140,7 +158,15 @@ const EditProductScreen = (props) => {
             isVegetarian,
             isGlutenFree,
             isLactoseFree,
-            isVegan
+            isVegan,
+            isDesayuno,
+            isComida,
+            isSnack,
+            isLonche,
+            isSandiwch,
+            isTaco,
+            isPan,
+            isDulce
           )
         );
       } else {
@@ -155,7 +181,15 @@ const EditProductScreen = (props) => {
             isVegetarian,
             isGlutenFree,
             isLactoseFree,
-            isVegan
+            isVegan,
+            isDesayuno,
+            isComida,
+            isSnack,
+            isLonche,
+            isSandiwch,
+            isTaco,
+            isPan,
+            isDulce
           )
         );
       }
@@ -174,6 +208,14 @@ const EditProductScreen = (props) => {
     isGlutenFree,
     isLactoseFree,
     isVegan,
+    isDesayuno,
+    isComida,
+    isSnack,
+    isLonche,
+    isSandiwch,
+    isTaco,
+    isPan,
+    isDulce,
   ]);
 
   useEffect(() => {
@@ -273,7 +315,9 @@ const EditProductScreen = (props) => {
             initiallyValid={!!editedProduct}
             minLength={5}
           />
-
+          <Text style={styles.description}>
+            Ingrediente, Ingrediente, Ingrediente
+          </Text>
           <FilterSwitch
             label="Se Encuentra Disponible"
             state={isAvailable}
@@ -281,7 +325,7 @@ const EditProductScreen = (props) => {
           />
 
           <View style={styles.screen}>
-            <Text style={styles.title}>Categorias</Text>
+            <Text style={styles.title}>TIPO DE COMIDA</Text>
             <FilterSwitch
               label="Libre De Glutten"
               state={isGlutenFree}
@@ -301,6 +345,50 @@ const EditProductScreen = (props) => {
               label="Es Vegetariano"
               state={isVegetarian}
               onChange={(newValue) => setIsVegetarian(newValue)}
+            />
+          </View>
+
+          <View style={styles.screen}>
+            <Text style={styles.title}>Categorias</Text>
+            <FilterSwitch
+              label="Desayuno"
+              state={isDesayuno}
+              onChange={(newValue) => setIsDesayuno(newValue)}
+            />
+            <FilterSwitch
+              label="Comida"
+              state={isComida}
+              onChange={(newValue) => setIsComida(newValue)}
+            />
+            <FilterSwitch
+              label="Snack"
+              state={isSnack}
+              onChange={(newValue) => setIsSnack(newValue)}
+            />
+            <FilterSwitch
+              label="Lonche"
+              state={isLonche}
+              onChange={(newValue) => setIsLonche(newValue)}
+            />
+            <FilterSwitch
+              label="Sandiwch"
+              state={isSandiwch}
+              onChange={(newValue) => setIsSandiwch(newValue)}
+            />
+            <FilterSwitch
+              label="Taco"
+              state={isTaco}
+              onChange={(newValue) => setIsTaco(newValue)}
+            />
+            <FilterSwitch
+              label="Pan"
+              state={isPan}
+              onChange={(newValue) => setIsPan(newValue)}
+            />
+            <FilterSwitch
+              label="Dulce"
+              state={isDulce}
+              onChange={(newValue) => setIsDulce(newValue)}
             />
           </View>
         </View>
@@ -329,6 +417,19 @@ export const screenOptions = (navData) => {
 };
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 15,
+    color: "#871f78",
+  },
+  description: {
+    fontFamily: "open-sans-bold",
+    fontSize: 9,
+    margin: 0,
+    padding: 0,
+    marginBottom: 5,
+    textAlign: "center",
+    color: "#808284",
+  },
   filterContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
