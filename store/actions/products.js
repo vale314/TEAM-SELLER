@@ -71,7 +71,18 @@ export const deleteProduct = (productId) => {
   };
 };
 
-export const createProduct = (title, description, imageUrl, price) => {
+export const createProduct = (
+  title,
+  description,
+  imageUrl,
+  ingredients,
+  price,
+  isAvailable,
+  isVegetarian,
+  isGlutenFree,
+  isLactoseFree,
+  isVegan
+) => {
   return async (dispatch, getState) => {
     // any async code you want!
     const token = getState().auth.token;
@@ -87,11 +98,16 @@ export const createProduct = (title, description, imageUrl, price) => {
         title,
         description,
         imageUrl,
+        ingredients,
         price,
         ownerId: userId,
+        available: isAvailable,
+        vegetarian: isVegetarian,
+        glutenFree: isGlutenFree,
+        lactoseFree: isLactoseFree,
+        vegan: isVegan,
       }),
     });
-
     const resData = await response.json();
 
     if (resData.error) {
@@ -105,8 +121,14 @@ export const createProduct = (title, description, imageUrl, price) => {
       ProductTitle,
       ProductDescription,
       ProductImageUrl,
+      ProductIngredients,
       ProductPrice,
       ProductOwnerId,
+      ProductAvailable,
+      ProductVegetarian,
+      ProductGlutenFree,
+      ProductLactosaFree,
+      ProductVegan,
     } = resData.product;
 
     dispatch({
@@ -115,10 +137,15 @@ export const createProduct = (title, description, imageUrl, price) => {
         id: ProductId,
         title: ProductTitle,
         description: ProductDescription,
-
+        available: ProductAvailable,
         imageurl: ProductImageUrl,
+        ingredients: ProductIngredients,
         price: ProductPrice,
         ownerId: ProductOwnerId,
+        vegetarian: ProductVegetarian,
+        glutenFree: ProductGlutenFree,
+        lactosaFree: ProductLactosaFree,
+        vegan: ProductVegan,
       },
     });
   };
@@ -128,12 +155,31 @@ export const updateProduct = (
   title,
   description,
   imageUrl,
+  ingredients,
   price,
-  productId
+  productId,
+  available,
+  isVegetarian,
+  isGlutenFree,
+  isLactoseFree,
+  isVegan
 ) => {
   return async (dispatch, getState) => {
     await dispatch(deleteProduct(productId));
 
-    dispatch(createProduct(title, description, imageUrl, price));
+    dispatch(
+      createProduct(
+        title,
+        description,
+        imageUrl,
+        ingredients,
+        price,
+        available,
+        isVegetarian,
+        isGlutenFree,
+        isLactoseFree,
+        isVegan
+      )
+    );
   };
 };
