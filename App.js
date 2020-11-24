@@ -13,6 +13,7 @@ import AppNavigator from "./navigation/AppNavigator";
 import mealsReducer from "./store/reducers/meals";
 import authReducer from "./store/reducers/auth";
 import productsReducer from "./store/reducers/products";
+import buyReducer from "./store/reducers/buy";
 
 enableScreens();
 
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   meals: mealsReducer,
   auth: authReducer,
   products: productsReducer,
+  buys: buyReducer,
 });
 
 const store = createStore(

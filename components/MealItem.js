@@ -5,9 +5,11 @@ import {
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
+  Button,
 } from "react-native";
 
 import DefaultText from "./DefaultText";
+import Colors from "../constants/Colors";
 
 const MealItem = (props) => {
   return (
@@ -16,19 +18,26 @@ const MealItem = (props) => {
         <View>
           <View style={{ ...styles.mealRow, ...styles.mealHeader }}>
             <ImageBackground
-              source={{ uri: props.image }}
+              source={{ uri: `data:image/gif;base64,${props.image}` }}
               style={styles.bgImage}
             >
               <View style={styles.titleContainer}>
                 <Text style={styles.title} numberOfLines={1}>
                   {props.title}
                 </Text>
+                <Button
+                  color={Colors.primary}
+                  title="Aceptar Compra"
+                  style={styles.Button}
+                  onPress={props.handleChange}
+                />
               </View>
             </ImageBackground>
           </View>
+
           <View style={{ ...styles.mealRow, ...styles.mealDetail }}>
             <DefaultText>$ {props.precio} </DefaultText>
-            <DefaultText>{props.estandar.toUpperCase()}</DefaultText>
+            <DefaultText>{props.fecha}</DefaultText>
           </View>
         </View>
       </TouchableOpacity>
@@ -37,6 +46,10 @@ const MealItem = (props) => {
 };
 
 const styles = StyleSheet.create({
+  Button: {
+    marginStart: 0,
+    paddingVertical: 0,
+  },
   mealItem: {
     height: 200,
     width: "100%",
@@ -59,8 +72,8 @@ const styles = StyleSheet.create({
   mealDetail: {
     paddingHorizontal: 10,
     justifyContent: "space-between",
-    alignItems: "center",
-    height: "15%",
+    alignItems: "flex-start",
+    height: "16%",
   },
   titleContainer: {
     backgroundColor: "rgba(0,0,0,0.5)",

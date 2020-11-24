@@ -55,6 +55,10 @@ const defaultStackNavOptions = {
   },
 };
 
+import BuysScreen, {
+  screenOptions as BuyScreenOptions,
+} from "../screens/BuyScreen";
+
 const MealsStackNavigator = createStackNavigator();
 
 export const MealsNavigator = () => {
@@ -87,6 +91,25 @@ export const MealsNavigator = () => {
         options={MealDetailScreenOptions}
       />
     </MealsStackNavigator.Navigator>
+  );
+};
+
+const BuysStackNavigator = createStackNavigator();
+
+export const BuysNavigator = () => {
+  return (
+    <BuysStackNavigator.Navigator screenOptions={defaultStackNavOptions}>
+      <BuysStackNavigator.Screen
+        name="Buy"
+        component={BuysScreen}
+        options={BuyScreenOptions}
+      />
+      <BuysStackNavigator.Screen
+        name="MealDetail"
+        component={MealDetailScreen}
+        options={MealDetailScreenOptions}
+      />
+    </BuysStackNavigator.Navigator>
   );
 };
 
@@ -142,6 +165,28 @@ const MealsFavTabNavigator = () => {
         }}
       />
     </MealsBottonNavigator.Navigator>
+  );
+};
+
+const BuyStackNavigator = createBottomTabNavigator();
+
+export const BuyNavigator = () => {
+  return (
+    <BuyStackNavigator.Navigator>
+      <BuyStackNavigator.Screen
+        name="Buys"
+        component={BuysNavigator}
+        options={{
+          tabBarIcon: (tabInfo) => (
+            <Ionicons
+              name="ios-restaurant"
+              size={25}
+              color={Colors.accentColor}
+            />
+          ),
+        }}
+      />
+    </BuyStackNavigator.Navigator>
   );
 };
 
@@ -232,6 +277,23 @@ export const MainNavigator = () => {
               color={props.color}
             />
           ),
+        }}
+      />
+      <MainDrawerNavigator.Screen
+        name="Compras"
+        component={BuyNavigator}
+        options={{
+          title: "Categorias",
+          drawerIcon: (props) => (
+            <Item
+              title="Menu"
+              iconName="ios-menu"
+              onPress={() => {
+                navData.navigation.toggleDrawer();
+              }}
+            />
+          ),
+          drawerLabel: "Compras",
         }}
       />
     </MainDrawerNavigator.Navigator>
