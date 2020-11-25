@@ -60,16 +60,20 @@ const UserProductsScreen = (props) => {
   }, [dispatch, loadProducts]);
 
   const deleteHandler = (id) => {
-    Alert.alert("Are you sure?", "Do you really want to delete this item?", [
-      { text: "No", style: "default" },
-      {
-        text: "Yes",
-        style: "destructive",
-        onPress: () => {
-          dispatch(productsActions.deleteProduct(id));
+    Alert.alert(
+      "Estas Muy Seguro?",
+      "Realmente quieres eliminar este articulo de tus productos?",
+      [
+        { text: "No", style: "default" },
+        {
+          text: "Si",
+          style: "destructive",
+          onPress: () => {
+            dispatch(productsActions.deleteProduct(id));
+          },
         },
-      },
-    ]);
+      ]
+    );
   };
 
   if (error) {
@@ -96,7 +100,10 @@ const UserProductsScreen = (props) => {
   if (!isLoading && userProducts.length === 0) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>No products found, maybe start creating some?</Text>
+        <Text>
+          No hay Comida, quieres crear un nuevo platillo para la venta? que
+          dices!
+        </Text>
       </View>
     );
   }
@@ -117,14 +124,14 @@ const UserProductsScreen = (props) => {
         >
           <Button
             color={Colors.primary}
-            title="Edit"
+            title="Editar"
             onPress={() => {
               editProductHandler(itemData.item.id);
             }}
           />
           <Button
             color={Colors.primary}
-            title="Delete"
+            title="Eliminar"
             onPress={deleteHandler.bind(this, itemData.item.id)}
           />
         </ProductItem>
@@ -135,7 +142,7 @@ const UserProductsScreen = (props) => {
 
 export const screenOptions = (navData) => {
   return {
-    headerTitle: "Your Products",
+    headerTitle: "Tu FOOD",
     headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item

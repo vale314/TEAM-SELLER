@@ -10,6 +10,8 @@ import CONFIG from "../../config";
 
 import { alert } from "./alert";
 
+import * as Permissions from "expo-permissions";
+
 const path =
   process.env.NODE_ENV == "development" ? CONFIG.development : CONFIG.deploy;
 
@@ -76,6 +78,7 @@ export const login = (email, password) => {
     const response = await fetch(`${path}/api/seller/login`, {
       method: "POST",
       headers: {
+        Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({

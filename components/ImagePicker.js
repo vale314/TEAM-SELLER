@@ -67,7 +67,7 @@ const ImgPicker = (props) => {
     <View style={styles.imagePicker}>
       <View style={styles.imagePreview}>
         {!pickedImage ? (
-          <Text>No image picked yet.</Text>
+          <Text>Ingresa una foto</Text>
         ) : (
           <Image
             style={styles.image}
@@ -76,7 +76,7 @@ const ImgPicker = (props) => {
         )}
       </View>
       <Button
-        title="Take Image"
+        title="Imagen"
         color={Colors.primary}
         onPress={openImagePickerAsync}
       />

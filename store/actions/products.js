@@ -124,7 +124,11 @@ export const createProduct = (
         dulce: isDulce,
       }),
     });
-    const resData = await response.json();
+    var resData;
+
+    resData = await response.json();
+
+    console.log(resData);
 
     if (resData.error) {
       const error = resData.msg;
@@ -205,28 +209,28 @@ export const updateProduct = (
   isDulce
 ) => {
   return async (dispatch, getState) => {
-    await dispatch(deleteProduct(productId));
-
-    dispatch(
-      createProduct(
-        title,
-        description,
-        imageUrl,
-        ingredients,
-        price,
-        available,
-        isVegetarian,
-        isGlutenFree,
-        isLactoseFree,
-        isVegan,
-        isDesayuno,
-        isComida,
-        isSnack,
-        isLonche,
-        isSandiwch,
-        isTaco,
-        isPan,
-        isDulce
+    dispatch(deleteProduct(productId)).then(
+      dispatch(
+        createProduct(
+          title,
+          description,
+          imageUrl,
+          ingredients,
+          price,
+          available,
+          isVegetarian,
+          isGlutenFree,
+          isLactoseFree,
+          isVegan,
+          isDesayuno,
+          isComida,
+          isSnack,
+          isLonche,
+          isSandiwch,
+          isTaco,
+          isPan,
+          isDulce
+        )
       )
     );
   };

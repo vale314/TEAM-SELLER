@@ -27,9 +27,12 @@ const BuysScreen = (props) => {
 
   const loadProducts = useCallback(async () => {
     setError(null);
+    setIsLoading(true);
     try {
       await dispatch(buyActions.fetchBuys(email));
+      setIsLoading(false);
     } catch (err) {
+      setIsLoading(false);
       setError(err.message);
     }
   }, [dispatch, setIsLoading, setError]);
@@ -67,7 +70,7 @@ const BuysScreen = (props) => {
   }
 
   const handleChange = () => {
-    dispatch(buyActions.fetchBuys(email));
+    loadProducts();
   };
 
   if (isLoading) {
@@ -90,13 +93,14 @@ const BuysScreen = (props) => {
       listData={buysItems}
       handleChange={handleChange}
       navigation={props.navigation}
+      order={false}
     />
   );
 };
 
 export const screenOptions = (navData) => {
   return {
-    headerTitle: "Tus Compras",
+    headerTitle: "Compras",
     headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item

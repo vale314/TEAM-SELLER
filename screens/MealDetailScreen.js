@@ -27,7 +27,6 @@ const MealDetailScreen = (props) => {
   } = props.route.params;
 
   if (key === undefined || key === null) {
-    console.log(props.route.params);
     return <Text>NO HAY ARTICULO</Text>;
   }
   return (

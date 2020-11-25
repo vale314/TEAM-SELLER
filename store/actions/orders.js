@@ -1,18 +1,18 @@
-export const SET_BUYS = "SET_BUYS";
+export const SET_ORDERS = "SET_ORDERS";
 
 import CONFIG from "../../config";
 
 const path =
   process.env.NODE_ENV == "development" ? CONFIG.development : CONFIG.deploy;
 
-export const fetchBuys = (email) => {
+export const fetchOrders = (email) => {
   return async (dispatch) => {
     // any async code you want!
     dispatch({
-      type: SET_BUYS,
-      buys: [],
+      type: SET_ORDERS,
+      orders: [],
     });
-    const response = await fetch(`${path}/api/seller/buy`, {
+    const response = await fetch(`${path}/api/seller/orders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -30,11 +30,11 @@ export const fetchBuys = (email) => {
       return alert("Hay Un Error", error);
     }
 
-    var loadedBuys = resData.buys;
+    var loadedOrders = resData.orders;
 
     dispatch({
-      type: SET_BUYS,
-      buys: loadedBuys,
+      type: SET_ORDERS,
+      orders: loadedOrders,
     });
   };
 };

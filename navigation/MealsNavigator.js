@@ -11,21 +11,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 
-import CategoriesScreen, {
-  screenOptions as CategoriesScreenOptions,
-} from "../screens/CategoriesScreen";
-import CategoryMealsScreen, {
-  screenOptions as CategoryMealsScreenOptions,
-} from "../screens/CategoryMealsScreen";
 import MealDetailScreen, {
   screenOptions as MealDetailScreenOptions,
 } from "../screens/MealDetailScreen";
-import FavoritesScreen, {
-  screenOptions as FavoritesScreenOptions,
-} from "../screens/FavoritesScreen";
-import FiltersScreen, {
-  screenOptions as FiltersScreenOptions,
-} from "../screens/FiltersScreen";
+
 import UserProductScreen, {
   screenOptions as UserProductScreenOptions,
 } from "../screens/UserProductScreen";
@@ -33,13 +22,21 @@ import EditProductScreen, {
   screenOptions as EditProductScreenOptions,
 } from "../screens/EditProduct";
 
-import Colors from "../constants/Colors";
-
 import AuthScreen, {
   screenOptions as AuthScreenOptions,
 } from "../screens/AuthScreen";
 
+import BuysScreen, {
+  screenOptions as BuyScreenOptions,
+} from "../screens/BuyScreen";
+
+import OrderScreen, {
+  screenOptions as OrderSceenOptions,
+} from "../screens/OrderScreen";
+
 import { logout } from "../store/actions/auth";
+
+import Colors from "../constants/Colors";
 
 const defaultStackNavOptions = {
   headerTitleStyle: {
@@ -55,20 +52,11 @@ const defaultStackNavOptions = {
   },
 };
 
-import BuysScreen, {
-  screenOptions as BuyScreenOptions,
-} from "../screens/BuyScreen";
-
 const MealsStackNavigator = createStackNavigator();
 
 export const MealsNavigator = () => {
   return (
     <MealsStackNavigator.Navigator screenOptions={defaultStackNavOptions}>
-      <MealsStackNavigator.Screen
-        name="Categories"
-        component={CategoriesScreen}
-        options={CategoriesScreenOptions}
-      />
       <MealsStackNavigator.Screen
         name="Product"
         component={UserProductScreen}
@@ -81,16 +69,30 @@ export const MealsNavigator = () => {
       />
 
       <MealsStackNavigator.Screen
-        name="CategoryMeals"
-        component={CategoryMealsScreen}
-        options={CategoryMealsScreenOptions}
-      />
-      <MealsStackNavigator.Screen
         name="MealDetail"
         component={MealDetailScreen}
         options={MealDetailScreenOptions}
       />
     </MealsStackNavigator.Navigator>
+  );
+};
+
+const OrdersNowStackNavigator = createStackNavigator();
+
+export const OrderNavigator = () => {
+  return (
+    <OrdersNowStackNavigator.Navigator screenOptions={defaultStackNavOptions}>
+      <OrdersNowStackNavigator.Screen
+        name="Orders"
+        component={OrderScreen}
+        options={OrderSceenOptions}
+      />
+      <OrdersNowStackNavigator.Screen
+        name="MealDetail"
+        component={MealDetailScreen}
+        options={MealDetailScreenOptions}
+      />
+    </OrdersNowStackNavigator.Navigator>
   );
 };
 
@@ -127,32 +129,13 @@ export const AuthNavigator = () => {
   );
 };
 
-const FavStackNavigator = createStackNavigator();
-
-export const FavNavigator = () => {
-  return (
-    <FavStackNavigator.Navigator screenOptions={defaultStackNavOptions}>
-      <FavStackNavigator.Screen
-        name="Favorites"
-        component={FavoritesScreen}
-        options={FavoritesScreenOptions}
-      />
-      <FavStackNavigator.Screen
-        name="MealDetail"
-        component={MealDetailScreen}
-        options={MealDetailScreenOptions}
-      />
-    </FavStackNavigator.Navigator>
-  );
-};
-
 const MealsBottonNavigator = createBottomTabNavigator();
 
 const MealsFavTabNavigator = () => {
   return (
     <MealsBottonNavigator.Navigator>
       <MealsBottonNavigator.Screen
-        name="Meals"
+        name="Tu Comida"
         component={MealsNavigator}
         options={{
           tabBarIcon: (tabInfo) => (
@@ -174,7 +157,7 @@ export const BuyNavigator = () => {
   return (
     <BuyStackNavigator.Navigator>
       <BuyStackNavigator.Screen
-        name="Buys"
+        name="Compras"
         component={BuysNavigator}
         options={{
           tabBarIcon: (tabInfo) => (
@@ -190,22 +173,25 @@ export const BuyNavigator = () => {
   );
 };
 
-const FilterStackNavigator = createStackNavigator();
+const OrderStackNavigator = createBottomTabNavigator();
 
-export const FiltersNavigator = () => {
+export const OrdersNowNavigator = () => {
   return (
-    <FilterStackNavigator.Navigator screenOptions={defaultStackNavOptions}>
-      <FilterStackNavigator.Screen
-        name="Filter"
-        component={FiltersScreen}
-        options={FiltersScreenOptions}
+    <OrderStackNavigator.Navigator>
+      <OrderStackNavigator.Screen
+        name="Tu-Orden"
+        component={OrderNavigator}
+        options={{
+          tabBarIcon: (tabInfo) => (
+            <Ionicons
+              name="ios-restaurant"
+              size={25}
+              color={Colors.accentColor}
+            />
+          ),
+        }}
       />
-      <FilterStackNavigator.Screen
-        name="MealDetail"
-        component={MealDetailScreen}
-        options={MealDetailScreenOptions}
-      />
-    </FilterStackNavigator.Navigator>
+    </OrderStackNavigator.Navigator>
   );
 };
 
@@ -224,7 +210,7 @@ export const MainNavigator = () => {
             <SafeAreaView forceInset={{ top: "always", horizontal: "never" }}>
               <DrawerItemList {...props} />
               <Button
-                title="Logout"
+                title="Salir"
                 color={Colors.primary}
                 onPress={() => {
                   dispatch(logout());
@@ -240,7 +226,7 @@ export const MainNavigator = () => {
         name="MealsFavs"
         component={MealsFavTabNavigator}
         options={{
-          title: "Categorias",
+          title: "Tu Comida",
           drawerIcon: (props) => (
             <Item
               title="Menu"
@@ -250,40 +236,14 @@ export const MainNavigator = () => {
               }}
             />
           ),
-          drawerLabel: "Meals",
-        }}
-      />
-      <MainDrawerNavigator.Screen
-        name="Filter"
-        component={FiltersNavigator}
-        options={{
-          drawerIcon: (props) => (
-            <Ionicons
-              name={Platform.OS === "android" ? "md-cart" : "ios-cart"}
-              size={23}
-              color={props.color}
-            />
-          ),
-        }}
-      />
-      <MainDrawerNavigator.Screen
-        name="Fav"
-        component={FavNavigator}
-        options={{
-          drawerIcon: (props) => (
-            <Ionicons
-              name={Platform.OS === "android" ? "md-cart" : "ios-cart"}
-              size={23}
-              color={props.color}
-            />
-          ),
+          drawerLabel: "Tu Comida",
         }}
       />
       <MainDrawerNavigator.Screen
         name="Compras"
         component={BuyNavigator}
         options={{
-          title: "Categorias",
+          title: "Compras",
           drawerIcon: (props) => (
             <Item
               title="Menu"
@@ -294,6 +254,23 @@ export const MainNavigator = () => {
             />
           ),
           drawerLabel: "Compras",
+        }}
+      />
+      <MainDrawerNavigator.Screen
+        name="Ordenes"
+        component={OrdersNowNavigator}
+        options={{
+          title: "Pedidos",
+          drawerIcon: (props) => (
+            <Item
+              title="Menu"
+              iconName="ios-menu"
+              onPress={() => {
+                navData.navigation.toggleDrawer();
+              }}
+            />
+          ),
+          drawerLabel: "Pedidos",
         }}
       />
     </MainDrawerNavigator.Navigator>

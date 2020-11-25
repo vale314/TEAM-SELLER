@@ -11,7 +11,33 @@ import {
 import DefaultText from "./DefaultText";
 import Colors from "../constants/Colors";
 
+import CONFIG from "../config";
+
+const path =
+  process.env.NODE_ENV == "development" ? CONFIG.development : CONFIG.deploy;
+
 const MealItem = (props) => {
+  const handleAccept = async () => {
+    const response = await fetch(`${path}/api/seller/confirm`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        idBuy: props.id,
+      }),
+    });
+
+    const resData = await response.json();
+    if (resData.error) {
+      const error = resData.msg;
+      // Dispatch error
+
+      return alert("Hay Un Error", error);
+    }
+    props.handleChange();
+  };
+
   return (
     <View style={styles.mealItem}>
       <TouchableOpacity onPress={props.onSelectMeal}>
@@ -24,13 +50,18 @@ const MealItem = (props) => {
               <View style={styles.titleContainer}>
                 <Text style={styles.title} numberOfLines={1}>
                   {props.title}
+                  {props.order}
                 </Text>
-                <Button
-                  color={Colors.primary}
-                  title="Aceptar Compra"
-                  style={styles.Button}
-                  onPress={props.handleChange}
-                />
+                {props.order == true ? (
+                  <Text> - </Text>
+                ) : (
+                  <Button
+                    color={Colors.primary}
+                    title="Aceptar Compra"
+                    style={styles.Button}
+                    onPress={handleAccept}
+                  />
+                )}
               </View>
             </ImageBackground>
           </View>

@@ -17,6 +17,7 @@ const MealList = (props) => {
         cliente={itemData.item.firstname}
         fecha={itemData.item.fecha}
         handleChange={props.handleChange}
+        order={props.order}
         onSelectMeal={() => {
           props.navigation.navigate("MealDetail", {
             key: itemData.item.idBuy,

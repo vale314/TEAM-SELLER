@@ -93,8 +93,8 @@ const EditProductScreen = (props) => {
   useEffect(() => {
     if (editedProduct != undefined && editedProduct != null) {
       setIsAvailable(editedProduct.available == 1 ? true : false);
-      setIsGlutenFree(editedProduct.glutenFree == 1 ? true : false);
-      setIsLactoseFree(editedProduct.lactoseFree == 1 ? true : false);
+      setIsGlutenFree(editedProduct.glutenfree == 1 ? true : false);
+      setIsLactoseFree(editedProduct.lactosefree == 1 ? true : false);
       setIsVegan(editedProduct.vegan == 1 ? true : false);
       setIsVegetarian(editedProduct.vegetarian == 1 ? true : false);
 
@@ -144,6 +144,7 @@ const EditProductScreen = (props) => {
     }
     setError(null);
     setIsLoading(true);
+    console.log(editedProduct);
     try {
       if (editedProduct) {
         await dispatch(
@@ -170,6 +171,7 @@ const EditProductScreen = (props) => {
           )
         );
       } else {
+        console.log("create");
         await dispatch(
           productsActions.createProduct(
             formState.inputValues.title,
@@ -251,7 +253,7 @@ const EditProductScreen = (props) => {
         <View style={styles.form}>
           <Input
             id="title"
-            label="Title"
+            label="Titulo"
             errorText="Please enter a valid title!"
             keyboardType="default"
             autoCapitalize="sentences"
@@ -265,7 +267,7 @@ const EditProductScreen = (props) => {
 
           <ImagePicker
             id="imageurl"
-            label="Image Url"
+            label="Imagen"
             errorText="Please enter a valid image url!"
             onInputChange={inputChangeHandler}
             initialValue={editedProduct ? editedProduct.imageurl : ""}
@@ -275,7 +277,7 @@ const EditProductScreen = (props) => {
           />
           <Input
             id="price"
-            label="Price"
+            label="Precio"
             errorText="Please enter a valid price!"
             keyboardType="decimal-pad"
             returnKeyType="next"
@@ -288,7 +290,7 @@ const EditProductScreen = (props) => {
 
           <Input
             id="description"
-            label="Description"
+            label="Descrpcion"
             errorText="Please enter a valid description!"
             keyboardType="default"
             autoCapitalize="sentences"
@@ -401,7 +403,7 @@ export const screenOptions = (navData) => {
   const sb =
     navData.route.params !== undefined ? navData.route.params.FnSubmit : null;
   return {
-    headerTitle: "EditProduct",
+    headerTitle: "EDITAR O CREAR",
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item

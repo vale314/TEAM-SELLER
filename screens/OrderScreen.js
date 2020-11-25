@@ -1,36 +1,38 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
-  FlatList,
-  StyleSheet,
   View,
-  Text,
+  StyleSheet,
   ActivityIndicator,
+  Text,
   Button,
 } from "react-native";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import { useSelector, useDispatch } from "react-redux";
 
 import HeaderButton from "../components/HeaderButton";
-import { CATEGORIES } from "../data/dummy-data";
-import CategoryGridTile from "../components/CategoryGridTile";
+import BuyList from "../components/BuyList";
+import DefaultText from "../components/DefaultText";
 
+import * as ordersActions from "../store/actions/orders";
 import Colors from "../constants/Colors";
 
-import * as productsActions from "../store/actions/products";
-
-import { useDispatch, useSelector } from "react-redux";
-
-const CategoriesScreen = (props) => {
-  const [error, setError] = useState();
+const OrderScreen = (props) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const dispatch = useDispatch();
 
+  const buysItems = useSelector((state) => state.orders.orders);
+  const email = useSelector((state) => state.auth.userId);
+
   const loadProducts = useCallback(async () => {
     setError(null);
-
+    setIsLoading(true);
     try {
-      await dispatch(productsActions.fetchProducts());
+      await dispatch(ordersActions.fetchOrders(email));
+      setIsLoading(false);
     } catch (err) {
+      setIsLoading(false);
       setError(err.message);
     }
   }, [dispatch, setIsLoading, setError]);
@@ -44,7 +46,7 @@ const CategoriesScreen = (props) => {
   }, [loadProducts]);
 
   useEffect(() => {
-    dispatch(productsActions.fetchProducts());
+    dispatch(ordersActions.fetchOrders(email));
   }, []);
 
   useEffect(() => {
@@ -67,6 +69,10 @@ const CategoriesScreen = (props) => {
     );
   }
 
+  const handleChange = () => {
+    loadProducts();
+  };
+
   if (isLoading) {
     return (
       <View style={styles.centered}>
@@ -75,33 +81,26 @@ const CategoriesScreen = (props) => {
     );
   }
 
-  const renderGridItem = (itemData) => {
+  if (buysItems.length === 0 || !buysItems) {
     return (
-      <CategoryGridTile
-        title={itemData.item.title}
-        color={itemData.item.color}
-        onSelect={() => {
-          props.navigation.navigate("CategoryMeals", {
-            categoryId: itemData.item.id,
-          });
-        }}
-      />
+      <View style={styles.content}>
+        <DefaultText>No hay Pedidos</DefaultText>
+      </View>
     );
-  };
-
+  }
   return (
-    <FlatList
-      keyExtractor={(item, index) => item.id}
-      data={CATEGORIES}
-      renderItem={renderGridItem}
-      numColumns={2}
+    <BuyList
+      listData={buysItems}
+      handleChange={handleChange}
+      navigation={props.navigation}
+      order={true}
     />
   );
 };
 
 export const screenOptions = (navData) => {
   return {
-    headerTitle: "Tipo De Comida",
+    headerTitle: "Tus Ordenes",
     headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
@@ -113,27 +112,15 @@ export const screenOptions = (navData) => {
         />
       </HeaderButtons>
     ),
-    headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        {" "}
-        <Item
-          title="Menu"
-          iconName="ios-add"
-          onPress={() => {
-            navData.navigation.navigate("Product");
-          }}
-        />
-      </HeaderButtons>
-    ),
   };
 };
 
 const styles = StyleSheet.create({
-  screen: {
+  content: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
 });
 
-export default CategoriesScreen;
+export default OrderScreen;
