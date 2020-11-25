@@ -230,10 +230,11 @@ export const MainNavigator = () => {
           drawerIcon: (props) => (
             <Item
               title="Menu"
-              iconName="ios-menu"
+              iconName="md-menu"
               onPress={() => {
                 navData.navigation.toggleDrawer();
               }}
+              color={Colors.accentColor}
             />
           ),
           drawerLabel: "Tu Comida",
@@ -247,7 +248,7 @@ export const MainNavigator = () => {
           drawerIcon: (props) => (
             <Item
               title="Menu"
-              iconName="ios-menu"
+              iconName="md-menu"
               onPress={() => {
                 navData.navigation.toggleDrawer();
               }}
@@ -264,7 +265,7 @@ export const MainNavigator = () => {
           drawerIcon: (props) => (
             <Item
               title="Menu"
-              iconName="ios-menu"
+              iconName="md-menu"
               onPress={() => {
                 navData.navigation.toggleDrawer();
               }}

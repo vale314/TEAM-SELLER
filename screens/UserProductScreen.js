@@ -147,10 +147,11 @@ export const screenOptions = (navData) => {
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Menu"
-          iconName={Platform.OS === "android" ? "md-menu" : "ios-menu"}
+          iconName="md-menu"
           onPress={() => {
             navData.navigation.toggleDrawer();
           }}
+          color={Colors.accentColor}
         />
       </HeaderButtons>
     ),

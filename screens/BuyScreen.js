@@ -105,7 +105,7 @@ export const screenOptions = (navData) => {
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item
           title="Menu"
-          iconName="ios-menu"
+          iconName="md-menu"
           onPress={() => {
             navData.navigation.toggleDrawer();
           }}
