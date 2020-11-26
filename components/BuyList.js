@@ -12,16 +12,16 @@ const MealList = (props) => {
         image={itemData.item.imageurl}
         precio={itemData.item.price}
         ingredients={itemData.item.ingredients}
-        key={itemData.item.idBuy}
-        id={itemData.item.idBuy}
+        key={itemData.item.idbuy}
+        id={itemData.item.idbuy}
         cliente={itemData.item.firstname}
         fecha={itemData.item.fecha}
         handleChange={props.handleChange}
         order={props.order}
         onSelectMeal={() => {
           props.navigation.navigate("MealDetail", {
-            key: itemData.item.idBuy,
-            id: itemData.item.idBuy,
+            key: itemData.item.idbuy,
+            id: itemData.item.idbuy,
             mealTitle: itemData.item.title,
             mealTitle: itemData.item.title,
             title: itemData.item.title,
