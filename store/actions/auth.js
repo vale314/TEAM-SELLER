@@ -6,14 +6,9 @@ export const AUTHENTICATE = "AUTHENTICATE";
 export const LOGOUT = "LOGOUT";
 export const SET_DID_TRY_AL = "SET_DID_TRY_AL";
 
-import CONFIG from "../../config";
-
 import { alert } from "./alert";
 
-import * as Permissions from "expo-permissions";
-
-const path =
-  process.env.NODE_ENV == "development" ? CONFIG.development : CONFIG.deploy;
+const path = "https://cucei-eats.herokuapp.com";
 
 let timer;
 
@@ -37,6 +32,9 @@ export const signup = (
   cellphone
 ) => {
   return async (dispatch) => {
+    if (!email.includes("udg.mx")) {
+      return alert("UDG Solamente", "Correo No Es Universitario");
+    }
     const response = await fetch(`${path}/api/seller/new`, {
       method: "POST",
       headers: {
@@ -74,6 +72,10 @@ export const signup = (
 
 export const login = (email, password) => {
   return async (dispatch) => {
+    if (!email.includes("udg.mx")) {
+      return alert("UDG Solamente", "Correo No Es Universitario");
+    }
+
     const response = await fetch(`${path}/api/seller/login`, {
       method: "POST",
       headers: {

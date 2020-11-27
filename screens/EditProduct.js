@@ -144,7 +144,7 @@ const EditProductScreen = (props) => {
     }
     setError(null);
     setIsLoading(true);
-    console.log(editedProduct);
+
     try {
       if (editedProduct) {
         await dispatch(
@@ -171,7 +171,6 @@ const EditProductScreen = (props) => {
           )
         );
       } else {
-        console.log("create");
         await dispatch(
           productsActions.createProduct(
             formState.inputValues.title,

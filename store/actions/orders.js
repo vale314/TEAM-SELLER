@@ -1,9 +1,6 @@
 export const SET_ORDERS = "SET_ORDERS";
 
-import CONFIG from "../../config";
-
-const path =
-  process.env.NODE_ENV == "development" ? CONFIG.development : CONFIG.deploy;
+const path = "https://cucei-eats.herokuapp.com";
 
 export const fetchOrders = (email) => {
   return async (dispatch) => {

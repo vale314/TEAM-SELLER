@@ -3,10 +3,7 @@ export const CREATE_PRODUCT = "CREATE_PRODUCT";
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const SET_PRODUCTS = "SET_PRODUCTS";
 
-import CONFIG from "../../config";
-
-const path =
-  process.env.NODE_ENV == "development" ? CONFIG.development : CONFIG.deploy;
+const path = "https://cucei-eats.herokuapp.com";
 
 export const fetchProducts = () => {
   return async (dispatch, getState) => {
@@ -127,8 +124,6 @@ export const createProduct = (
     var resData;
 
     resData = await response.json();
-
-    console.log(resData);
 
     if (resData.error) {
       const error = resData.msg;

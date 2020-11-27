@@ -11,10 +11,7 @@ import {
 import DefaultText from "./DefaultText";
 import Colors from "../constants/Colors";
 
-import CONFIG from "../config";
-
-const path =
-  process.env.NODE_ENV == "development" ? CONFIG.development : CONFIG.deploy;
+const path = "https://cucei-eats.herokuapp.com";
 
 const MealItem = (props) => {
   const handleAccept = async () => {

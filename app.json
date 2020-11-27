@@ -1,15 +1,8 @@
 {
   "expo": {
-    "name": "RN Guide",
-    "slug": "rn-complete-guide",
+    "name": "UDGEATS-COMPRADOR",
+    "slug": "rn-complete-guide-1",
     "privacy": "public",
-    "android": {
-      "permissions": [
-        "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE",
-        "INTERNET"
-      ]
-    },
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -24,7 +17,12 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.sghost.valentinalejandro6SELLER",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.sghost.valentinalejandro6SELLER",
+      "versionCode": 1
     }
   }
 }
