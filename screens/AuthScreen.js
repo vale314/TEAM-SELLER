@@ -124,7 +124,7 @@ const AuthScreen = (props) => {
           style={styles.backgroundVideo}
           source={{
             uri:
-              "http://valentinalejandror6.sg-host.com/wp-content/uploads/2020/11/pexels-nataliya-vaitkevich-5794869.mp4",
+              "http://valentinalejandror6.sg-host.com/wp-content/uploads/2020/11/pexels-c-technical-5674749.mp4",
           }}
           shouldPlay
           rate={1.0}

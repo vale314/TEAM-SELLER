@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "UDGEATS-COMPRADOR",
-    "slug": "rn-complete-guide-1.1",
+    "slug": "rn-complete-guide1",
     "privacy": "public",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
